@@ -21,11 +21,11 @@ module.exports = function(grunt) {
       all: ['tests/**/*.js']
     },
     jshint: {
-      files: ['index.js', 'lib/**/*.js', 'test/**/*.js'],
+      files: ['index.js', 'lib/**/*.js', 'tests/**/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
-        immed: true,
+        immed: false,
         latedef: true,
         newcap: true,
         noarg: true,
@@ -34,6 +34,7 @@ module.exports = function(grunt) {
         boss: true,
         eqnull: true,
         browser: false,
+        expr: true,
         globals: {
           require: true,
           define: true,
@@ -41,19 +42,20 @@ module.exports = function(grunt) {
           describe: true,
           expect: true,
           exports: true,
-          module: true
-
+          module: true,
+          it: true
         }
       }
     },
     watch: {
       files: '<%= jshint.files %>',
-      tasks: ['jshint', 'mocha']
+      tasks: ['jshint', 'mochacli']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-cli');
   grunt.loadNpmTasks('grunt-release');
 
@@ -61,5 +63,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jshint', 'mochacli']);
 
   grunt.registerTask('test', ['mochacli']);
+
 
 };

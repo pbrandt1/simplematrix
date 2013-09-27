@@ -36,16 +36,16 @@ describe('Matrix equality', function () {
   ok(a == b);
   ok(a === b);
 });
-
-describe('Identity matrix existence', function () {
-  var I = new m.I(1);
-  var I_m = new m.Matrix([
-    [1]
-  ]);
-  ok(I === I_m);
-});
 */
-describe('Matrix operations', function () {
+describe('Identity matrix existence', function () {
+  var i2 = new m.Matrix([[1,0],[0,1]]);
+  it('should be an identity matrix...', function() {
+    var eye = new m.Identity(2);
+    eye.equals(i2).should.be.ok;
+  });
+});
+
+describe('Simple matrix operations', function () {
   var a = new m.Matrix([
     [1, 2],
     [3, 4]
@@ -83,29 +83,29 @@ describe('Matrix operations', function () {
       a.plus(a).equals(a.times(2)).should.be.ok;
     });
   });
+  describe('The transpose of a', function() {
+    it('should equal the transpose', function() {
+      var a_T = new m.Matrix([[1,3],[2,4]]);
+      a.transpose().equals(a_T).should.be.ok;
+    });
+  });
 });
+
+describe('Hard matrix operations', function() {
+  var a = new m.Matrix([[1,3,3],[1,4,3],[1,3,4]]);
+  var c = new m.Matrix([[7,-3,-3],[-1,1,0],[-1,0,1]]); //inverse of a
+  describe('Gauss-Jordan elimination inverse', function() {
+    var a_inverse = a.inverse();
+    it('should equal the inverse', function() {
+      a_inverse.equals(c).should.be.ok;
+    });
+    it('should not change the original matrix', function() {
+      a.equals(new m.Matrix([[1,3,3],[1,4,3],[1,3,4]])).should.be.ok;
+    });
+  });
+});
+
 /*
-  var a = new m.Matrix([
-    [1]
-  ]);
-  var b = new m.Matrix([
-    [2]
-  ]);
-  ok(a * b);
-  ok(a * b == b);
-  ok(a + b);
-  ok(a + b == new m.Matrix([
-    [3]
-  ]));
-  ok(a - b);
-  ok(a - b == new m.Matrix([
-    [-1]
-  ]));
-  ok(a / b);
-  ok(a / b == new m.Matrix([
-    [0 - .5]
-  ]));
-});
 
 describe('incompatible dimensions throws error in add', function () {
   var a = new m.Matrix([
