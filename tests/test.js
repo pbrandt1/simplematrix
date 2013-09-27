@@ -89,6 +89,11 @@ describe('Simple matrix operations', function () {
       a.transpose().equals(a_T).should.be.ok;
     });
   });
+  describe('A copy of a', function() {
+    it('should equal a', function() {
+      a.copy().equals(a).should.be.ok;
+    });
+  });
 });
 
 describe('Hard matrix operations', function() {
