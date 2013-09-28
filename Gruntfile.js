@@ -43,7 +43,8 @@ module.exports = function(grunt) {
           expect: true,
           exports: true,
           module: true,
-          it: true
+          it: true,
+          console: true
         }
       }
     },

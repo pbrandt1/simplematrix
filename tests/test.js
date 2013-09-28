@@ -7,8 +7,6 @@ describe('Matrix properties of [[1,2],[3,4]]', function() {
   ]);
   describe('Matrix dimensions', function () {
     it('should be a 2x2 matrix', function() {
-      a.m.should.equal(2);
-      a.n.should.equal(2);
       a.rows.should.equal(2);
       a.columns.should.equal(2);
     });
@@ -43,7 +41,7 @@ describe('Simple matrix operations', function () {
       b[0][1].should.equal(4);
       b[1][0].should.equal(6);
       b[1][1].should.equal(8);
-      b = a.multiply(2);
+      b = a.times(2);
       b[0][0].should.equal(2);
       b[0][1].should.equal(4);
       b[1][0].should.equal(6);
@@ -53,7 +51,7 @@ describe('Simple matrix operations', function () {
   describe('Multiply a matrix by a matrix of incompatible dimensions', function() {
     it('should throw an error', function() {
       var b = new m.Matrix([[1, 2, 3]]);
-      (function() { a.multiply(b); }).should.throw();
+      (function() { a.times(b); }).should.throw();
     });
   });
   describe('Multiply a 2x2 matrix by a 2x1 matrix', function() {
@@ -97,7 +95,7 @@ describe('Hard matrix operations', function() {
   var b = new m.Matrix([[16],[18],[19]]);
   var x = new m.Matrix([[1],[2],[3]]);
   describe('Solving Ax=b', function() {
-    var solution = a.solve(b);
+    var solution = b.dividedBy(a);
     it('should solve for x', function() {
       solution.equals(x).should.be.ok;
     });

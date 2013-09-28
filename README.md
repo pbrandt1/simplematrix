@@ -23,39 +23,32 @@ var i2 = new m.Identity(2);
 ```
 
 ## Functions on each Matrix
-### times, multiply
+### times
 Returns the result of multiplying a matrix by a constant or another (correctly-dimensioned) matrix.
 ```js
 var c = a.times(b);
-var c = a.multiply(b);
 ```
-### plus, add
+### plus
 ```js
 var c = a.plus(b);
-var c = a.add(b);
 ```
 ### equals
 Watch out for round-off error
 ```js
 if (a.equals(b))
 ```
-### solve
+### dividedBy
 Solves the system of linear equations AX=B via the Gauss-Jordan method with partial pivoting.
 ```js
-var x = a.solve(b);
-```
-### divideBy
-Similar to `solve()`.
-```js
-var x = b.divideBy(a);
+var x = b.dividedBy(a);
 ```
 ### inverse
-Returns the inverse of a matrix (by letting B equal the identity matrix in  `a.solve(b)`).
+Returns the inverse of a matrix (by letting B equal the identity matrix in  `a.solve(b)`).  The inverse is cached, so if you call `.inverse()` a second time, the only work done will be to see if the matrix has changed since the last inverse computation.
 ```js
-var a_inverse = a.inverse();
+var a_inv = a.inverse();
 ```
 ### transpose
-Returns the transpose of a matrix.
+Returns the transpose of a matrix.  Not cached.
 ```js
 var a_T = a.transpose();
 ```
@@ -63,4 +56,14 @@ var a_T = a.transpose();
 Copies a matrix
 ```js
 var a2 = a.copy();
+```
+
+## Properties on each Matrix
+### rows
+```js
+var m = a.rows;
+```
+### columns
+```js
+var n = a.columns;
 ```
