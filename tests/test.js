@@ -23,20 +23,6 @@ describe('Matrix properties of [[1,2],[3,4]]', function() {
   });
 });
 
-/*
-describe('Matrix equality', function () {
-  var a = new m.Matrix([
-    [1, 2],
-    [3, 4]
-  ]);
-  var b = new m.Matrix([
-    [1, 2],
-    [3, 4]
-  ]);
-  ok(a == b);
-  ok(a === b);
-});
-*/
 describe('Identity matrix existence', function () {
   var i2 = new m.Matrix([[1,0],[0,1]]);
   it('should be an identity matrix...', function() {
@@ -108,34 +94,18 @@ describe('Hard matrix operations', function() {
       a.equals(new m.Matrix([[1,3,3],[1,4,3],[1,3,4]])).should.be.ok;
     });
   });
+  var b = new m.Matrix([[16],[18],[19]]);
+  var x = new m.Matrix([[1],[2],[3]]);
+  describe('Solving Ax=b', function() {
+    var solution = a.solve(b);
+    it('should solve for x', function() {
+      solution.equals(x).should.be.ok;
+    });
+    it('should not change a', function() {
+      a.equals(new m.Matrix([[1,3,3],[1,4,3],[1,3,4]])).should.be.ok;
+    });
+    it('should not change b', function() {
+      b.equals(new m.Matrix([[16],[18],[19]])).should.be.ok;
+    });
+  });
 });
-
-/*
-
-describe('incompatible dimensions throws error in add', function () {
-  var a = new m.Matrix([
-    [1, 2]
-  ]);
-  var b = new m.Matrix([
-    [1]
-  ]);
-  // uh i forget how to do this
-  expectException(a + b);
-})
-
-describe('2x1 matrix operations', function () {
-  var a = new m.Matrix([
-    [1],
-    [2]
-  ]);
-  var b = new m.Matrix([
-    [3],
-    [4]
-  ]);
-  ok(a + b);
-  ok(a + b == new m.Matrix([
-    [3],
-    [6]
-  ]));
-})
-  */
