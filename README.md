@@ -7,13 +7,23 @@ npm install simplematrix
 
 ```js
 var m = require('simplematrix');
-// let's solve AX = B
+// solve AX = B
 var a = new m.Matrix([[1,2],[3,4]]);
 var b = new m.Matrix([[1,1],[1,0]]);
-var x = a.solve(b);
-/* x:
+var x = b.dividedBy(a);
+x // Watch out for floating point error
+/*
 { '0': [ -1, -1.9999999999999996 ],
   '1': [ 1, 1.4999999999999998 ] }
+*/
+x.rounded() // You can round it if you want (casts to precision 12)
+/*
+{ '0': [ -1, -2 ],
+  '1': [ 1, 1.5 ] }
+*/
+x.equals(x.rounded()) // But the equals() operator automatically compensates for floating point error
+/*
+true
 */
 ```
 ## Constructors
@@ -33,7 +43,7 @@ var c = a.times(b);
 var c = a.plus(b);
 ```
 ### equals
-Watch out for round-off error
+Tests for equality. Handles floating point error nicely.  
 ```js
 if (a.equals(b))
 ```
@@ -56,6 +66,11 @@ var a_T = a.transpose();
 Copies a matrix
 ```js
 var a2 = a.copy();
+```
+### rounded
+Takes care of floating point error using `parseFloat(f.toPrecision(12))` on each element f of the matrix
+```js
+var niceMatrix = x.rounded();
 ```
 
 ## Properties on each Matrix

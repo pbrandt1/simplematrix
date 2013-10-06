@@ -1,4 +1,5 @@
 var m = require('../');
+var Matrix = m.Matrix;
 
 describe('Matrix properties of [[1,2],[3,4]]', function() {
   var a = new m.Matrix([
@@ -78,6 +79,14 @@ describe('Simple matrix operations', function () {
       a.copy().equals(a).should.be.ok;
     });
   });
+  describe('Floating point', function() {
+    it('should be rounded in equals()', function() {
+      (new Matrix([[0.1]]))
+        .plus(new Matrix([[0.2]]))
+        .equals(new Matrix([[0.3]]))
+        .should.be.ok;
+    });
+  });
 });
 
 describe('Hard matrix operations', function() {
@@ -95,15 +104,29 @@ describe('Hard matrix operations', function() {
   var b = new m.Matrix([[16],[18],[19]]);
   var x = new m.Matrix([[1],[2],[3]]);
   describe('Solving Ax=b', function() {
-    var solution = b.dividedBy(a);
-    it('should solve for x', function() {
-      solution.equals(x).should.be.ok;
+    describe('with dividedBy()', function() {
+      var solution = b.dividedBy(a);
+      it('should solve for x', function() {
+        solution.equals(x).should.be.ok;
+      });
+      it('should not change a', function() {
+        a.equals(new m.Matrix([[1,3,3],[1,4,3],[1,3,4]])).should.be.ok;
+      });
+      it('should not change b', function() {
+        b.equals(new m.Matrix([[16],[18],[19]])).should.be.ok;
+      });
     });
-    it('should not change a', function() {
-      a.equals(new m.Matrix([[1,3,3],[1,4,3],[1,3,4]])).should.be.ok;
-    });
-    it('should not change b', function() {
-      b.equals(new m.Matrix([[16],[18],[19]])).should.be.ok;
+    describe('with solve()', function() {
+      var solution = a.solve(b);
+      it('should solve for x', function() {
+        solution.equals(x).should.be.ok;
+      });
+      it('should not change a', function() {
+        a.equals(new m.Matrix([[1,3,3],[1,4,3],[1,3,4]])).should.be.ok;
+      });
+      it('should not change b', function() {
+        b.equals(new m.Matrix([[16],[18],[19]])).should.be.ok;
+      });
     });
   });
 });
