@@ -101,6 +101,21 @@ describe('Hard matrix operations', function() {
       a.equals(new m.Matrix([[1,3,3],[1,4,3],[1,3,4]])).should.be.ok;
     });
   });
+  describe('Any random matrix', function() {
+    it('the inverse times itself should equal the identity matrix', function() {
+      for (var n = 1; n < 11; n++) {
+        var newMatrix = [];
+        for (var i = 0; i < n; i++) {
+          newMatrix[i] = [];
+          for (var j = 0; j < n; j++) {
+            newMatrix[i][j] = Math.random()*10 - 5;
+          }
+        }
+        var q = new Matrix(newMatrix);
+      q.times(q.inverse()).equals(new m.Identity(n)).should.eql(true, 'failed for n = ' + n);
+      }
+    });
+  });
   var b = new m.Matrix([[16],[18],[19]]);
   var x = new m.Matrix([[1],[2],[3]]);
   describe('Solving Ax=b', function() {
@@ -127,6 +142,20 @@ describe('Hard matrix operations', function() {
       it('should not change b', function() {
         b.equals(new m.Matrix([[16],[18],[19]])).should.be.ok;
       });
+    });
+  });
+  describe('Caching the inverse', function() {
+    it('should provide performance improvements', function() {
+      var r = m.Random(20, 20);
+      var start = +new Date();
+      r.inverse();
+      var stop = +new Date();
+      var firstCalc = stop - start;
+      start = +new Date();
+      r.inverse();
+      stop = +new Date();
+      var secondCalc = stop - start;
+      secondCalc.should.not.be.above(firstCalc);
     });
   });
 });

@@ -43,7 +43,7 @@ var c = a.times(b);
 var c = a.plus(b);
 ```
 ### equals
-Tests for equality. Handles floating point error nicely.  
+Tests for equality. Handles floating point error nicely.
 ```js
 if (a.equals(b))
 ```
@@ -68,7 +68,7 @@ Copies a matrix
 var a2 = a.copy();
 ```
 ### rounded
-Takes care of floating point error using `parseFloat(f.toPrecision(12))` on each element f of the matrix
+Takes care of floating point error using `parseFloat(f.toFixed(12))` on each element f of the matrix
 ```js
 var niceMatrix = x.rounded();
 ```
