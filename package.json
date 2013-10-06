@@ -1,19 +1,19 @@
 {
   "name": "simplematrix",
   "description": "Simple matrix and vector operations.",
-  "tags": [
+  "keywords": [
     "matrix",
     "vector",
     "math"
   ],
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Peter Brandt <peter.m.brandt@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "http://github.com/pbrandt1/simplematrix.git"
+    "url": "git://github.com/pbrandt1/simplematrix.git"
   },
   "bugs": {
-    "url": "http://github.com/pbrandt1/simplematrix/issues"
+    "url": "https://github.com/pbrandt1/simplematrix/issues"
   },
   "engines": [
     "node >= 0.8.0"
