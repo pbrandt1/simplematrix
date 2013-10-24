@@ -68,6 +68,13 @@ describe('Simple matrix operations', function () {
       a.plus(a).equals(a.times(2)).should.be.ok;
     });
   });
+  describe('A - B', function() {
+    it('should, uh, work I guess', function() {
+      var a = new m.Matrix([[1,2]]);
+      var b = new m.Matrix([[1,1]]);
+      a.minus(b).equals(new m.Matrix([[0,1]])).should.be.ok;
+    });
+  });
   describe('The transpose of a', function() {
     it('should equal the transpose', function() {
       var a_T = new m.Matrix([[1,3],[2,4]]);
